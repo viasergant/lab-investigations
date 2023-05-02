@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:id="dialog" prefHeight="477.0" prefWidth="535.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.serg.labinvestigations.controller.BloodController">
+   <children>
+      <GridPane>
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="263.0" minWidth="10.0" prefWidth="92.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="486.0" minWidth="10.0" prefWidth="403.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints />
+          <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+        </rowConstraints>
+         <children>
+             <Label text="Дата" GridPane.rowIndex="0" />
+             <DatePicker fx:id="datePicker" GridPane.columnIndex="1" />
+             <Label text="ПІБ" GridPane.rowIndex="1" />
+             <TextField fx:id="name" maxWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+             <Label text="Вік" GridPane.rowIndex="2" />
+            <FlowPane GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <children>
+                   <TextField fx:id="age" maxWidth="50.0" prefHeight="25.0" prefWidth="72.0" />
+                   <Label text="Тварина">
+                     <padding>
+                        <Insets left="15.0" right="10.0" />
+                     </padding></Label>
+                   <ComboBox fx:id="patientType">
+                   </ComboBox>
+                   <Label text="Стать">
+                     <padding>
+                        <Insets left="15.0" right="10.0" />
+                     </padding></Label>
+                   <ComboBox fx:id="gender">
+                   </ComboBox>
+               </children>
+            </FlowPane>
+             <Label text="Направив" GridPane.rowIndex="3" />
+             <TextField fx:id="origin" maxWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+         </children>
+         <padding>
+            <Insets left="20.0" right="20.0" top="10.0" />
+         </padding>
+      </GridPane>
+      <GridPane alignment="TOP_RIGHT" hgap="10.0">
+        <columnConstraints>
+          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="91.0" minWidth="13.0" prefWidth="91.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="337.0" minWidth="50.0" prefWidth="50.0" />
+          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="337.0" minWidth="50.0" prefWidth="50.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="337.0" minWidth="50.0" prefWidth="50.0" />
+          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="337.0" minWidth="50.0" prefWidth="50.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="337.0" minWidth="50.0" prefWidth="50.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints />
+          <RowConstraints />
+          <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+        </rowConstraints>
+         <children>
+            <Label text="Лейкоцити" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <TextField fx:id="field1" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            <Label text="Еритроцити" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <TextField fx:id="field2" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label text="Гемоглобін" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+            <TextField fx:id="field3" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label text="Гематокрит" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+            <TextField fx:id="field4" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label text="Тромбоцити" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+            <TextField fx:id="field5" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label text="ШОЕ" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+            <TextField fx:id="field6" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Label text="Гіпохромія" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+            <TextField fx:id="field7" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Label text="Ац" GridPane.columnIndex="0" GridPane.rowIndex="7" />
+            <TextField fx:id="field8" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <Label text="Пц" GridPane.columnIndex="0" GridPane.rowIndex="8" />
+            <TextField fx:id="field9" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <Label text="Мц" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+            <TextField fx:id="field10" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+            <Label text="Ю" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <TextField fx:id="field11" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <Label text="П" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <TextField fx:id="field12" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <Label text="С" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <TextField fx:id="field13" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+            <Label text="Е" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <TextField fx:id="field14" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+            <Label text="М" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <TextField fx:id="field15" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+            <Label text="Л" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+            <TextField fx:id="field16" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+            <Label text="Пл" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+            <TextField fx:id="field17" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+            <Label text="Вир" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+            <TextField fx:id="field18" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+            <Label text="Піроплазмоз" GridPane.columnIndex="4" GridPane.rowIndex="0" />
+            <TextField fx:id="field19" GridPane.columnIndex="5" GridPane.rowIndex="0" />
+            <Label text="Ерлихіоз" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+            <TextField fx:id="field20" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+            <Label text="Дірофілярії" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+            <TextField fx:id="field21" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+            <Label text="Анаплазмоз" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+            <TextField fx:id="field22" GridPane.columnIndex="5" GridPane.rowIndex="3" />
+            <Label text="Пх" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+            <TextField fx:id="field23" GridPane.columnIndex="5" GridPane.rowIndex="4" />
+            <Label text="Нц" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+            <TextField fx:id="field24" GridPane.columnIndex="5" GridPane.rowIndex="5" />
+            <Label text="Т.Жоллі" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+            <TextField fx:id="field25" GridPane.columnIndex="5" GridPane.rowIndex="6" />
+         </children>
+         <VBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </VBox.margin>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </GridPane>
+      <GridPane hgap="10.0" maxHeight="100.0">
+         <columnConstraints>
+            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="237.0" minWidth="10.0" prefWidth="111.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="430.0" minWidth="10.0" prefWidth="424.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+             <Label text="Примітки" />
+             <TextArea fx:id="details" prefHeight="50.0" prefWidth="429.0" GridPane.columnIndex="1" />
+         </children>
+         <padding>
+            <Insets bottom="10.0" right="10.0" top="10.0" />
+         </padding>
+      </GridPane>
+      <HBox alignment="TOP_RIGHT" prefHeight="2.0" prefWidth="220.0">
+         <children>
+            <Button fx:id="saveBtn" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onSave" text="Зберегти">
+               <HBox.margin>
+                  <Insets bottom="10.0" right="10.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="cancelBtn" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onCancel" text="Відміна">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</VBox>
