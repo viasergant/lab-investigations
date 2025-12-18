@@ -13,13 +13,13 @@
   <stayAlive>false</stayAlive>
   <restartOnCrash>true</restartOnCrash>
   <manifest></manifest>
-  <icon>C:\prj\lab-investigations\image\microsope.ico</icon>
+  <icon>C:\prj\lab-investigations\image\microscope.ico</icon>
   <singleInstance>
     <mutexName>lab-investigation</mutexName>
     <windowTitle></windowTitle>
   </singleInstance>
   <jre>
-    <path>jre</path>
+    <path>./jre</path>
     <requiresJdk>false</requiresJdk>
     <requires64Bit>false</requires64Bit>
     <minVersion>17</minVersion>

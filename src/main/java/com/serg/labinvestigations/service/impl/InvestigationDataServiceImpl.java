@@ -9,6 +9,7 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -32,7 +33,8 @@ public class InvestigationDataServiceImpl implements InvestigationDataService {
 
     @Override
     public List<InvestigationData> findAll() {
-        return repository.findAll();
+        //return repository.findAllByOrderByDateDesc();
+        return repository.findAll(Sort.by(Sort.Direction.DESC, "date"));
     }
 
     @Override
@@ -65,6 +67,7 @@ public class InvestigationDataServiceImpl implements InvestigationDataService {
             }
             queryStr.append(" i.date <= :endDate ");
         }
+        queryStr.append(" order by date desc");
         String queryS = queryStr.toString();
         Query query = entityManager.createQuery(queryStr.toString());
         if (queryS.contains("name")) {

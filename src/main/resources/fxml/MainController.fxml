@@ -17,6 +17,7 @@
                 </Menu>
                 <Menu text="Створити">
                     <items>
+                        <MenuItem onAction="#onFullCreate" text="Повний Аналіз" />
                         <MenuItem onAction="#onScrapingCreate" text="Соскоб" />
                         <MenuItem onAction="#onExcretaCreate" text="Виділення" />
                         <MenuItem onAction="#onUrineGeneralInvestigationCreate" text="Загальний аналіз сечі" />

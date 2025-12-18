@@ -9,9 +9,12 @@ import com.serg.labinvestigations.ui.field.FxDatePickerConverter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.util.StringConverter;
 import org.controlsfx.control.Notifications;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +23,11 @@ import org.springframework.util.ReflectionUtils;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Arrays;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public abstract class InvestigationDialogController extends DialogController {
+  private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
   public Button saveBtn;
   public Button cancelBtn;
   @FXML
@@ -40,6 +44,16 @@ public abstract class InvestigationDialogController extends DialogController {
   public ComboBox patientType;
   @FXML
   public TextArea details;
+  @FXML
+  public TextArea details1;
+  @FXML
+  public TextArea details2;
+  @FXML
+  public TextArea details3;
+  @FXML
+  public TextArea details4;
+  @FXML
+  public TextArea details5;
   @FXML
   public TextField field1;
   @FXML
@@ -132,6 +146,134 @@ public abstract class InvestigationDialogController extends DialogController {
   public TextField field45;
   @FXML
   public TextField field46;
+  @FXML
+  public TextField field47;
+  @FXML
+  public TextField field48;
+  @FXML
+  public TextField field49;
+  @FXML
+  public TextField field50;
+  @FXML
+  public TextField field51;
+  @FXML
+  public TextField field52;
+  @FXML
+  public TextField field53;
+  @FXML
+  public TextField field54;
+  @FXML
+  public TextField field55;
+  @FXML
+  public TextField field56;
+  @FXML
+  public TextField field57;
+  @FXML
+  public TextField field58;
+  @FXML
+  public TextField field59;
+  @FXML
+  public TextField field60;
+  @FXML
+  public TextField field61;
+  @FXML
+  public TextField field62;
+  @FXML
+  public TextField field63;
+  @FXML
+  public TextField field64;
+  @FXML
+  public TextField field65;
+  @FXML
+  public TextField field66;
+  @FXML
+  public TextField field67;
+  @FXML
+  public TextField field68;
+  @FXML
+  public TextField field69;
+  @FXML
+  public TextField field70;
+  @FXML
+  public TextField field71;
+  @FXML
+  public TextField field72;
+  @FXML
+  public TextField field73;
+  @FXML
+  public TextField field74;
+  @FXML
+  public TextField field75;
+  @FXML
+  public TextField field76;
+  @FXML
+  public TextField field77;
+  @FXML
+  public TextField field78;
+  @FXML
+  public TextField field79;
+  @FXML
+  public TextField field80;
+  @FXML
+  public TextField field81;
+  @FXML
+  public TextField field82;
+  @FXML
+  public TextField field83;
+  @FXML
+  public TextField field84;
+  @FXML
+  public TextField field85;
+  @FXML
+  public TextField field86;
+  @FXML
+  public TextField field87;
+  @FXML
+  public TextField field88;
+  @FXML
+  public TextField field89;
+  @FXML
+  public TextField field90;
+  @FXML
+  public TextField field91;
+  @FXML
+  public TextField field92;
+  @FXML
+  public TextField field93;
+  @FXML
+  public TextField field94;
+  @FXML
+  public TextField field95;
+  @FXML
+  public TextField field96;
+  @FXML
+  public TextField field97;
+  @FXML
+  public TextField field98;
+  @FXML
+  public TextField field99;
+  @FXML
+  public TextField field100;
+  @FXML
+  public TextField field101;
+  @FXML
+  public TextField field102;
+  @FXML
+  public TextField field103;
+  @FXML
+  public TextField field104;
+  @FXML
+  public TextField field105;
+  @FXML
+  public TextField field106;
+  @FXML
+  public TextField field107;
+  @FXML
+  public TextField field108;
+  @FXML
+  public TextField field109;
+  @FXML
+  public TextField field110;
 
   protected InvestigationData selectedData;
   @Autowired
@@ -169,6 +311,47 @@ public abstract class InvestigationDialogController extends DialogController {
       }
     });
     gender.getSelectionModel().select(0);
+    dialog.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent event) ->
+    {
+      if (event.getCode() == KeyCode.ENTER) {
+        KeyEvent newEvent
+            = new KeyEvent(
+            null,
+            null,
+            KeyEvent.KEY_PRESSED,
+            "",
+            "\t",
+            KeyCode.TAB,
+            event.isShiftDown(),
+            event.isControlDown(),
+            event.isAltDown(),
+            event.isMetaDown()
+        );
+
+        Event.fireEvent(event.getTarget(), newEvent);
+        event.consume();
+      }
+    });
+    datePicker.setConverter(new StringConverter<LocalDate>() {
+      @Override
+      public String toString(LocalDate localDate) {
+        if (localDate == null)
+          return "";
+        return dateTimeFormatter.format(localDate);
+      }
+
+      @Override
+      public LocalDate fromString(String dateString) {
+        if (dateString == null || dateString.trim().isEmpty())
+          return null;
+        try {
+          return LocalDate.parse(dateString, dateTimeFormatter);
+        } catch (Exception e) {
+          //Bad date value entered
+          return null;
+        }
+      }
+    });
   }
 
   public InvestigationDialogController initNew() {
@@ -178,14 +361,15 @@ public abstract class InvestigationDialogController extends DialogController {
     LocalDate localDate = instant.atZone(ZoneId.systemDefault()).toLocalDate();
     datePicker.setValue(localDate);
     initCommon();
+    init();
     return this;
   }
 
   protected void saveData(InvestigationData selectedData) {
     InvestigationData investigationData = (selectedData != null) ? selectedData : (new InvestigationData());
     investigationData.setName(name.getText());
-    investigationData.setDate(datePicker.getValue());
-    investigationData.setDetails(details.getText());
+    investigationData.setDate(LocalDate.parse(datePicker.getEditor().getText(), dateTimeFormatter));
+    //investigationData.setDetails(details.getText());
     investigationData.setAge(age.getText());
     investigationData.setOrigin(origin.getText());
     investigationData.setPatientType(((PatientType) patientType.getSelectionModel().getSelectedItem()).name());
@@ -196,8 +380,13 @@ public abstract class InvestigationDialogController extends DialogController {
         String name = field.getName();
         Node node = dialog.lookup("#" + name);
         String value = null;
-        if (node instanceof TextField) {
-          value = ((TextField) node).getText();
+        if (node instanceof TextField textField) {
+          value = textField.getText();
+          field.setAccessible(true);
+          field.set(investigationData, value);
+        }
+        if (node instanceof TextArea textArea) {
+          value = textArea.getText();
           field.setAccessible(true);
           field.set(investigationData, value);
         }
@@ -246,8 +435,11 @@ public abstract class InvestigationDialogController extends DialogController {
       field.setAccessible(true);
       Object value = ReflectionUtils.getField(field, focusedItem);
       Node node = dialog.lookup("#" + name);
-      if (node instanceof TextField) {
-        ((TextField) node).setText((String) value);
+      if (node instanceof TextField textField) {
+        textField.setText((String) value);
+      }
+      if (node instanceof TextArea textArea) {
+        textArea.setText((String) value);
       }
     });
 
@@ -260,7 +452,9 @@ public abstract class InvestigationDialogController extends DialogController {
     } catch (Exception e) {
 
     }
-    details.setText(focusedItem.getDetails());
+    if (details != null) {
+      details.setText(focusedItem.getDetails());
+    }
     selectedData = focusedItem;
   }
 }
