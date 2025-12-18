@@ -10,7 +10,9 @@ public enum InvestigationType {
     EXCRETA("Виділення", ExcretaController.class),
     BLOOD("Загальний аналіз крові", BloodController.class),
     OAK_BH("ОАК+БХ",OakBhController.class),
-    COPROGRAM("Копрограма",CoprogramController.class);
+    COPROGRAM("Копрограма",CoprogramController.class),
+    FULL("Повний аналіз", FullController.class);
+
 
     private final String value;
     private final Class<? extends DialogController> dialogControllerClass;

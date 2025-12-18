@@ -204,4 +204,8 @@ public class MainController {
     public void onCoprogramInvestigationCreate(ActionEvent actionEvent) {
         fxWeaver.loadController(CoprogramController.class).initNew().show();
     }
+
+  public void onFullCreate(ActionEvent actionEvent) {
+      fxWeaver.loadController(FullController.class).initNew().show();
+  }
 }
