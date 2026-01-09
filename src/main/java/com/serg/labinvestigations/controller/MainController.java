@@ -20,11 +20,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.KeyCode;
 import lombok.extern.slf4j.Slf4j;
 import net.rgielen.fxweaver.core.FxWeaver;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.controlsfx.control.Notifications;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -33,14 +33,21 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 @Slf4j
 @FxmlView("/fxml/MainController.fxml")
 public class MainController {
 
+    private static final String DELETE_CMD_ID = "deleteCmd";
+    private static final int DELETE_COLUMN_WIDTH = 30;
+    private static final int NAME_COLUMN_MIN_WIDTH = 300;
+
     private final String greeting;
     private final FxWeaver fxWeaver;
+    private final InvestigationDataService investigationService;
+
     @FXML
     public DatePicker filterDateEnd;
     @FXML
@@ -51,74 +58,75 @@ public class MainController {
     private TableView<InvestigationData> table;
     @FXML
     private Label label;
-    @Autowired
-    private InvestigationDataService investigationService;
+
     private ObservableList<InvestigationData> data;
+    private boolean tableInitialized = false;
 
     @FXML
     public void initialize() {
+        if (!tableInitialized) {
+            initializeTableColumns();
+            tableInitialized = true;
+        }
         reloadData();
-        // Столбцы таблицы
+    }
 
+    private void initializeTableColumns() {
         TableColumn<InvestigationData, Date> dateColumn = new TableColumn<>("Дата");
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("dateFormatted"));
 
         TableColumn<InvestigationData, String> nameColumn = new TableColumn<>("ПІБ");
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        nameColumn.setMinWidth(300);
+        nameColumn.setMinWidth(NAME_COLUMN_MIN_WIDTH);
 
         TableColumn<InvestigationData, InvestigationType> typeColumn = new TableColumn<>("Аналіз");
         typeColumn.setCellValueFactory(new PropertyValueFactory<>("investigationTypeValue"));
 
-        TableColumn<InvestigationData, ImageView> deleteColumn = new TableColumn<InvestigationData, ImageView>("");
+        TableColumn<InvestigationData, ImageView> deleteColumn = new TableColumn<>("");
         deleteColumn.setCellValueFactory(new PropertyValueFactory<>("deleteImage"));
-        deleteColumn.setId("deleteCmd");
-        deleteColumn.setMaxWidth(30);
-        deleteColumn.setMinWidth(30);
-        table.getColumns().setAll(dateColumn,
-                nameColumn,
-                typeColumn,
-                deleteColumn);
+        deleteColumn.setId(DELETE_CMD_ID);
+        deleteColumn.setMaxWidth(DELETE_COLUMN_WIDTH);
+        deleteColumn.setMinWidth(DELETE_COLUMN_WIDTH);
 
-        // Данные таблицы
-        table.setItems(data);
+        table.getColumns().setAll(dateColumn, nameColumn, typeColumn, deleteColumn);
     }
 
     public MainController(@Value("${spring.application.demo.greeting}") String greeting,
-                          FxWeaver fxWeaver) {
+                          FxWeaver fxWeaver,
+                          InvestigationDataService investigationService) {
         this.greeting = greeting;
         this.fxWeaver = fxWeaver;
+        this.investigationService = investigationService;
     }
     @SuppressWarnings("unchecked")
     @PostConstruct
     public void init() {
     }
 
-    public void loadData() {
-
-    }
-    public void onExitMenuItem(ActionEvent actionEvent) {
-    }
-
-    public void onBloodInvestigationCreate(ActionEvent actionEvent) {
-    }
-
-    public void handleAboutAction(ActionEvent actionEvent) {
-    }
-
     private void applyFilter(String name, LocalDate from, LocalDate to) {
-        List<InvestigationData> investigationDataList = investigationService.findWithFilter(name, from,to);
+        List<InvestigationData> investigationDataList = investigationService.findWithFilter(name, from, to);
         data = FXCollections.observableArrayList(investigationDataList);
-        List<String> names = investigationDataList.stream().map(data -> data.getName()).toList();
         table.setItems(data);
-        filterName.getEntries().clear();
-        filterName.getEntries().addAll(names);
+
+        // Extract unique names for autocomplete
+        filterName.getEntries().setAll(
+            investigationDataList.stream()
+                .map(InvestigationData::getName)
+                .distinct()
+                .collect(Collectors.toList())
+        );
     }
 
     public void onApplyFilter() {
-        applyFilter(filterName.getText(),
-                StringUtils.hasLength(filterDateStart.getEditor().getText())?filterDateStart.getValue():null,
-                StringUtils.hasLength(filterDateEnd.getEditor().getText())?filterDateEnd.getValue():null);
+        String nameFilter = filterName.getText();
+        LocalDate startDate = StringUtils.hasLength(filterDateStart.getEditor().getText())
+                ? filterDateStart.getValue()
+                : null;
+        LocalDate endDate = StringUtils.hasLength(filterDateEnd.getEditor().getText())
+                ? filterDateEnd.getValue()
+                : null;
+
+        applyFilter(nameFilter, startDate, endDate);
     }
 
     public void onClick(MouseEvent mouseEvent) {
